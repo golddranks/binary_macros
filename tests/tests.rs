@@ -1,6 +1,5 @@
 #![feature(plugin)]
-
-#![plugin(binary_macros)]
+#![plugin(binary_macros, dotenv_macros)]
 
 #[test]
 fn binary_works() {
@@ -40,4 +39,24 @@ fn base64_works() {
 #[test]
 fn base64url_works() {
     assert_eq!(base64url!("_A=="), b"\xfc");
+}
+
+
+
+#[test]
+fn base64_test() {
+    let challenger = std::str::from_utf8(base64!("VGVzdGluZyBCYXNlNjQh")).unwrap();
+    let correct = "Testing Base64!";
+    assert_eq!(challenger, correct);
+}
+#[test]
+fn include_str() {
+    let challenger = std::str::from_utf8(base64!(include_str!("test_str.txt"))).unwrap();
+    let correct = "Testing include_str!";
+    assert_eq!(challenger, correct);
+}
+
+#[test]
+fn include_envvar() {
+    assert_eq!(base64!(dotenv!("BINARY_MACROS_TEST_VARIABLE")), b"Testing dotenv!");
 }

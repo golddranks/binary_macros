@@ -6,5 +6,9 @@ authors = ["Pyry Kontio <pyry.kontio@drasa.eu>"]
 [dependencies]
 data-encoding = "1.1.2"
 
+[dev-dependencies]
+dotenv = "0.8"
+dotenv_macros = "0.9"
+
 [lib]
 plugin = true
