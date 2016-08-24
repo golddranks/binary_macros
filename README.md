@@ -12,7 +12,7 @@ The macros from this crate support expanding macros inside them, and then decodi
 #![feature(plugin)]
 #![plugin(binary_macros)]
 
-let public_key = base64!(include_str!());
+let public_key = base64!(include_str!("id_rsa.pub"));
 ``` 
 
 You might also want to pull data from environmental variables:
@@ -21,7 +21,7 @@ You might also want to pull data from environmental variables:
 #![feature(plugin)]
 #![plugin(binary_macros, dotenv_macros)]
 
-let public_key = binary_macros::base64!(dotenv!("MYCRATE_PUBLIC_KEY"));
+let public_key = base64!(dotenv!("MYCRATE_PUBLIC_KEY"));
 ``` 
 
 ## Included macros:
