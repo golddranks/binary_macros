@@ -44,7 +44,6 @@ base32!("C4======") // Base32. Uses numbers A-Z and 2-7. Group of 8 digits = 5 b
 base32hex!("ME======") // Base32 that uses extended hexadecimal: 0-9 and A-V. Group of 8 digits = 5 bytes, uses = as end padding.
 base64!("YQ==") // Base64. Uses numbers A-Z, a-z, 0-9, + and /. Group of 4 digits = 3 bytes, uses = as end padding.
 base64url!("_A==") // URL-compatible Base64. Uses numbers A-Z, a-z, 0-9, - and _. Group of 4 digits = 3 bytes, uses = as end padding.
-}
 ```
 
 
