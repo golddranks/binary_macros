@@ -6,12 +6,19 @@ This library decodes string literals that may contain various binary-to-text enc
 Why is this useful? Let's say you want to include a binary blob inside your crate, a public key, for example. You can do that with `include_bytes!()` from the Rust `std`. However, if you want your data to be easily editable and copy-pasteable,
 a raw binary blob is not going to make it. (Besides, public keys are often distributed as Base64.) On the other hand, if you include text with `include_str!()`, you'll have to decode it runtime.
 
-The macros from this crate support expanding macros inside them, and then decoding the result so can easily do the job compile-time:
+The macros from this crate support expanding other macros inside them first, and then decoding the result so can easily do the job compile-time. To get started, include this in your Cargo.toml dependencies:
 
+```
+[dependencies]
+binary_macros = "0.1"
+```
+Stick this to the start of your source code to enable the unstable plugins feature and enable binary_macros:
 ```
 #![feature(plugin)]
 #![plugin(binary_macros)]
-
+```
+...and then you are ready to decode!
+```
 let public_key = base64!(include_str!("id_rsa.pub"));
 ``` 
 
@@ -20,7 +27,7 @@ You might also want to pull data from environmental variables:
 ```
 #![feature(plugin)]
 #![plugin(binary_macros, dotenv_macros)]
-
+...
 let public_key = base64!(dotenv!("MYCRATE_PUBLIC_KEY"));
 ``` 
 
