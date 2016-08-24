@@ -1,9 +1,12 @@
 [package]
 name = "binary_macros"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Pyry Kontio <pyry.kontio@drasa.eu>"]
 description = "Macros for decoding binary-to-text encodings in string literals to [u8] literals."
 license = "MIT"
+repository = "https://github.com/golddranks/binary_macros"
+readme = "README.md"
+keywords = ["base64", "hex", "octal", "binary", "encoding", "decoding", "macro"]
 
 [dependencies]
 data-encoding = "1.1.2"
