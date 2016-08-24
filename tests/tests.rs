@@ -51,12 +51,14 @@ fn base64_test() {
 }
 #[test]
 fn include_str() {
-    let challenger = std::str::from_utf8(base64!(include_str!("test_str.txt"))).unwrap();
-    let correct = "Testing include_str!";
+    let challenger = base64!(include_str!("test_str.txt"));
+    let correct = b"Testing include_str!";
     assert_eq!(challenger, correct);
 }
 
 #[test]
 fn include_envvar() {
-    assert_eq!(base64!(dotenv!("BINARY_MACROS_TEST_VARIABLE")), b"Testing dotenv!");
+    let challenger = base64!(dotenv!("BINARY_MACROS_TEST_VARIABLE"));
+    let correct = b"Testing dotenv!";
+    assert_eq!(challenger, correct);
 }
