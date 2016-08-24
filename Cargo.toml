@@ -6,7 +6,7 @@ description = "Macros for decoding binary-to-text encodings in string literals t
 license = "MIT"
 repository = "https://github.com/golddranks/binary_macros"
 readme = "README.md"
-keywords = ["base64", "hex", "octal", "binary", "encoding", "decoding", "macro"]
+keywords = ["base64", "hex", "binary", "encoding", "decoding"]
 
 [dependencies]
 data-encoding = "1.1.2"
