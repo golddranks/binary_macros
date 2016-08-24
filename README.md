@@ -1,5 +1,5 @@
 # binary_macros
-Rust macros for decoding binary formats from string literals to [u8] literals.
+Rust macros for decoding binary-to-text encodings in string literals to [u8] literals.
 
 This library decodes string literals that may contain various binary-to-text encodings, such as Base64, to binary literals at compile-time.
 
@@ -40,4 +40,4 @@ base64url!("_A==") // URL-compatible Base64. Uses numbers A-Z, a-z, 0-9, - and _
 ```
 
 
-Huge kudos to the (data-encoding)[https://github.com/ia0/data-encoding] crate for providing a wide variety of encodings!
+Huge kudos to the [data-encoding](https://github.com/ia0/data-encoding) crate for providing a wide variety of encodings!
