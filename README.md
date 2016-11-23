@@ -3,7 +3,7 @@ Rust macros for decoding binary-to-text encodings in string literals to [u8] lit
 
 This library decodes string literals that may contain various binary-to-text encodings, such as Base64, to binary literals at compile-time.
 
-Version 0.1.*. Tested and working on `rustc 1.13.0-nightly (3c5a0fa45 2016-08-22)`. I'll release a stable 1.0.0 once the [Procedural macros 1.1](https://github.com/rust-lang/rfcs/pull/1681) land on stable Rust. Bug reports, pull requests etc. welcome!
+Version 0.2.*. Tested and working on `rustc 1.15.0-nightly (7b3eeea22 2016-11-21)`. I'll release a stable 1.0.0 once the [Procedural macros 1.1](https://github.com/rust-lang/rfcs/pull/1681) land on stable Rust. Bug reports, pull requests etc. welcome!
 
 Why is this useful? Let's say you want to include a binary blob inside your crate, a public key, for example. You can do that with `include_bytes!()` from the Rust `std`. However, if you want your data to be easily editable and copy-pasteable,
 a raw binary blob is not going to make it. (Besides, public keys are often distributed as Base64.) On the other hand, if you include text with `include_str!()`, you'll have to decode it runtime.
@@ -12,7 +12,7 @@ The macros from this crate support expanding other macros inside them first, and
 
 ```
 [dependencies]
-binary_macros = "0.1"
+binary_macros = "0.2"
 ```
 Stick this to the start of your source code to enable the unstable plugins feature and enable binary_macros:
 ```
