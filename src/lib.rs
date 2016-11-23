@@ -5,7 +5,7 @@ extern crate rustc;
 extern crate rustc_plugin;
 extern crate data_encoding;
 
-use syntax::parse::token::InternedString;
+use syntax::symbol::Symbol;
 use syntax::ast::LitKind::ByteStr;
 use syntax::ext::base;
 use syntax::ext::base::{ExtCtxt, MacResult, DummyResult, MacEager};
@@ -14,7 +14,7 @@ use syntax::codemap::Span;
 use syntax::tokenstream::TokenTree;
 
 fn expand(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree])
-        -> Result<InternedString, Box<MacResult + 'static>> {
+        -> Result<Symbol, Box<MacResult + 'static>> {
 
     // Expand the insides of the macro first
     let mut exprs = match base::get_exprs_from_tts(cx, sp, tts) {
@@ -51,8 +51,7 @@ fn build_ast(cx: &mut ExtCtxt, sp: Span, result : Result<Vec<u8>, String>) -> Bo
 fn base2(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'static> {
      match expand(cx, sp, tts) {
         Ok(input_string) => {
-            let input_string = input_string.trim().as_bytes();
-            let decoded_result = data_encoding::base2::decode(input_string)
+            let decoded_result = data_encoding::base2::decode(input_string.as_str().trim().as_bytes())
                 .map_err(|e| format!("argument should be well-formed Base2 string literal (i.e. binary, with numbers 0 and 1), but it wasn't: {:?}", e) );
             build_ast(cx, sp, decoded_result)
         },
@@ -63,8 +62,7 @@ fn base2(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'stat
 fn base4(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'static> {
      match expand(cx, sp, tts) {
         Ok(input_string) => {
-            let input_string = input_string.trim().as_bytes();
-            let decoded_result = data_encoding::base4::decode(input_string)
+            let decoded_result = data_encoding::base4::decode(input_string.as_str().trim().as_bytes())
                 .map_err(|e| format!("argument should be well-formed Base4 string literal (i.e. quaternary, with numbers 0-3), but it wasn't: {:?}", e) );
             build_ast(cx, sp, decoded_result)
         },
@@ -75,8 +73,7 @@ fn base4(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'stat
 fn base8(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'static> {
      match expand(cx, sp, tts) {
         Ok(input_string) => {
-            let input_string = input_string.trim().as_bytes();
-            let decoded_result = data_encoding::base8::decode(input_string)
+            let decoded_result = data_encoding::base8::decode(input_string.as_str().trim().as_bytes())
                 .map_err(|e| format!("argument should be well-formed Base8 string literal (i.e. octal, with numbers 0-7, using = as end padding), but it wasn't: {:?}", e) );
             build_ast(cx, sp, decoded_result)
         },
@@ -87,8 +84,7 @@ fn base8(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'stat
 fn base16(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'static> {
      match expand(cx, sp, tts) {
         Ok(input_string) => {
-            let input_string = input_string.trim().as_bytes();
-            let decoded_result = data_encoding::base16::decode(input_string)
+            let decoded_result = data_encoding::base16::decode(input_string.as_str().trim().as_bytes())
                 .map_err(|e| format!("argument should be well-formed Base16 string literal (i.e. hexadecimal, with numbers 0-9, A-F), but it wasn't: {:?}", e) );
             build_ast(cx, sp, decoded_result)
         },
@@ -99,8 +95,7 @@ fn base16(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'sta
 fn base32(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'static> {
      match expand(cx, sp, tts) {
         Ok(input_string) => {
-            let input_string = input_string.trim().as_bytes();
-            let decoded_result = data_encoding::base32::decode(input_string)
+            let decoded_result = data_encoding::base32::decode(input_string.as_str().trim().as_bytes())
                 .map_err(|e| format!("argument should be well-formed Base32 string literal (with numbers A-Z, 2-7, using = as end padding), but it wasn't: {:?}", e) );
             build_ast(cx, sp, decoded_result)
         },
@@ -111,8 +106,7 @@ fn base32(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'sta
 fn base32hex(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'static> {
      match expand(cx, sp, tts) {
         Ok(input_string) => {
-            let input_string = input_string.trim().as_bytes();
-            let decoded_result = data_encoding::base32hex::decode(input_string)
+            let decoded_result = data_encoding::base32hex::decode(input_string.as_str().trim().as_bytes())
                 .map_err(|e| format!("argument should be well-formed Base32-hex string literal (with numbers 0-9, A-V, using = as end padding), but it wasn't: {:?}", e) );
             build_ast(cx, sp, decoded_result)
         },
@@ -123,8 +117,7 @@ fn base32hex(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + '
 fn base64(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'static> {
      match expand(cx, sp, tts) {
         Ok(input_string) => {
-            let input_string = input_string.trim().as_bytes();
-            let decoded_result = data_encoding::base64::decode(input_string)
+            let decoded_result = data_encoding::base64::decode(input_string.as_str().trim().as_bytes())
                 .map_err(|e|format!("argument should be well-formed Base64 string literal (with numbers A-Z, a-z, 0-9, + and /, using = as end padding), but it wasn't: {:?}", e) );
             build_ast(cx, sp, decoded_result)
         },
@@ -135,8 +128,7 @@ fn base64(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'sta
 fn base64url(cx: &mut ExtCtxt, sp: Span, tts: &[TokenTree]) -> Box<MacResult + 'static> {
      match expand(cx, sp, tts) {
         Ok(input_string) => {
-            let input_string = input_string.trim().as_bytes();
-            let decoded_result = data_encoding::base64url::decode(input_string)
+            let decoded_result = data_encoding::base64url::decode(input_string.as_str().trim().as_bytes())
                 .map_err(|e|format!("argument should be well-formed url-compatible Base64 string literal (with numbers A-Z, a-z, 0-9, - and _, using = as end padding), but it wasn't: {:?}", e) );
             build_ast(cx, sp, decoded_result)
         },
