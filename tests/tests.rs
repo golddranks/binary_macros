@@ -1,9 +1,9 @@
-#![feature(plugin)]
-#![plugin(binary_macros, dotenv_macros)]
+#[macro_use]
+extern crate binary_macros;
 
 #[test]
 fn binary_works() {
-    assert_eq!(base2!("01100001"), b"a");
+    assert_eq!(base2!("01100001000000000000000000"), b"a");
 }
 
 #[test]
@@ -42,23 +42,24 @@ fn base64url_works() {
 }
 
 
-
 #[test]
 fn base64_test() {
     let challenger = std::str::from_utf8(base64!("VGVzdGluZyBCYXNlNjQh")).unwrap();
     let correct = "Testing Base64!";
     assert_eq!(challenger, correct);
 }
+
 #[test]
 fn include_str() {
-    let challenger = base64!(include_str!("test_str.txt"));
+    let challenger = base64!("file:tests/test_str.txt");
     let correct = b"Testing include_str!";
     assert_eq!(challenger, correct);
 }
 
 #[test]
 fn include_envvar() {
-    let challenger = base64!(dotenv!("BINARY_MACROS_TEST_VARIABLE"));
+    let challenger = base64!("aaaaaaaaaaaaaaaaaaaaaaaaa");
     let correct = b"Testing dotenv!";
     assert_eq!(challenger, correct);
 }
+
