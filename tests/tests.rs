@@ -6,13 +6,10 @@ fn binary_works() {
     assert_eq!(base2!("011000010110000101100001"), b"aaa");
 }
 
-// A bug in the proc-macro-hack crate?
-/*
 #[test]
-fn binary_fails() {
-    assert_eq!(base2!("01100001011000010110000101100001"), b"aaaa");
+fn trivial_test_fails() {
+    assert_eq!(trivial_test!("abcdefghijklmnopqrstuvwxyz"), "abcdefghijklmnopqrstuvwxyz");
 }
-*/
 
 #[test]
 fn base4_works() {
