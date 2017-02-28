@@ -11,6 +11,7 @@ keywords = ["base64", "hex", "binary", "encoding", "decoding"]
 [dependencies]
 proc-macro-hack = "0.3"
 data-encoding = "1.2"
+dotenv = "0.8"
 
 [lib]
 proc-macro = true

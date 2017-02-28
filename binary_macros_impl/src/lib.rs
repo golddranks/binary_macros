@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate proc_macro_hack;
 extern crate data_encoding;
+extern crate dotenv;
 use std::io::Read;
 use data_encoding::decode::Error;
 
@@ -19,6 +20,7 @@ fn helper<F>(input: &str, decoder: F)
 
     } else if input.starts_with("dotenv:") {
 
+        dotenv::dotenv().ok();
         let var = std::env::var(&input[7..]).expect("Error reading environment variable");
         decoder(var.as_bytes()).expect("Parse error")
 
@@ -51,8 +53,7 @@ proc_macro_expr_impl! {
         helper(input, data_encoding::base32::decode)
     }
     pub fn base64_impl(input: &str) -> String {
-        return "b\"Test\"".to_owned();
-//        helper(input, data_encoding::base64::decode)
+        helper(input, data_encoding::base64::decode)
     }
     pub fn base64url_impl(input: &str) -> String {
         helper(input, data_encoding::base64url::decode)
