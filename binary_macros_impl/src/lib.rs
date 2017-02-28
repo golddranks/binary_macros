@@ -18,10 +18,10 @@ fn helper<F>(input: &str, decoder: F)
         file.read_to_string(&mut contents).expect("Error reading file");
         decoder(contents.trim().as_bytes()).expect("Parse error")
 
-    } else if input.starts_with("dotenv:") {
+    } else if input.starts_with("env:") {
 
         dotenv::dotenv().ok();
-        let var = std::env::var(&input[7..]).expect("Error reading environment variable");
+        let var = std::env::var(&input[4..]).expect("Error reading environment variable");
         decoder(var.as_bytes()).expect("Parse error")
 
     } else {
