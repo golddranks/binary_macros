@@ -9,8 +9,8 @@ readme = "README.md"
 keywords = ["base64", "hex", "binary", "encoding", "decoding"]
 
 [dependencies]
-proc-macro-hack = "0.4"
-binary_macros_impl = { path = "./binary_macros_impl" }
+proc-macro-hack = "0.3"
+binary_macros_impl = "0.4"
 
 [dev-dependencies]
 dotenv = "0.8"
