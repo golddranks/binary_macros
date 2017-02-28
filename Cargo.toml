@@ -1,6 +1,6 @@
 [package]
 name = "binary_macros"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["Pyry Kontio <pyry.kontio@drasa.eu>"]
 description = "Macros for decoding base64-like encodings in string literals to [u8] literals."
 license = "MIT"
@@ -9,7 +9,7 @@ readme = "README.md"
 keywords = ["base64", "hex", "binary", "encoding", "decoding"]
 
 [dependencies]
-proc-macro-hack = "0.3"
+proc-macro-hack = "0.4"
 binary_macros_impl = { path = "./binary_macros_impl" }
 
 [dev-dependencies]

@@ -14,4 +14,3 @@ proc_macro_expr_decl!(base32hex! => base32hex_impl);
 proc_macro_expr_decl!(base32! => base32_impl);
 proc_macro_expr_decl!(base64! => base64_impl);
 proc_macro_expr_decl!(base64url! => base64url_impl);
-proc_macro_expr_decl!(trivial_test! => trivial_test_impl);

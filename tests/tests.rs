@@ -7,11 +7,6 @@ fn binary_works() {
 }
 
 #[test]
-fn trivial_test_fails() {
-    assert_eq!(trivial_test!("abcdefghijklmnopqrstuvwxyz"), "abcdefghijklmnopqrstuvwxyz");
-}
-
-#[test]
 fn base4_works() {
     assert_eq!(base4!("1201"), b"a");
 }

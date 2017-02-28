@@ -58,7 +58,4 @@ proc_macro_expr_impl! {
     pub fn base64url_impl(input: &str) -> String {
         helper(input, data_encoding::base64url::decode)
     }
-    pub fn trivial_test_impl(input: &str) -> String {
-        input.to_owned()
-    }
 }
