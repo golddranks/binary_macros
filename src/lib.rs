@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate proc_macro_hack;
 
+#[allow(unused_imports)]
 #[macro_use]
 extern crate binary_macros_impl;
 
