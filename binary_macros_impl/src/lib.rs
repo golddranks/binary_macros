@@ -1,3 +1,4 @@
+extern crate proc_macro;
 #[macro_use]
 extern crate proc_macro_hack;
 extern crate data_encoding;
