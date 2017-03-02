@@ -1,9 +1,9 @@
 # binary_macros
 Rust macros for decoding base64 and hexadecimal -like encodings from string literals to [u8] literals at compile-time.
 
-Version 1.0.0 Tested and working on stable Rust. The first supported version is 1.15.0. Bug reports, pull requests etc. welcome!
+Version 0.6 is intended to have stable interface. Releasing 1.0 later. Tested and working on stable Rust. The first supported version is 1.15.0. Bug reports, pull requests etc. welcome!
 
-Why is these macros useful? Let's say you want to include a binary blob inside your crate, a public key, for example. You can do that with the `include_bytes!()` macro from the Rust `std`. However, editing, viewing and copy-pasting raw binary blobs is hard! There is a reason public keys are often distributed as base64. On the other hand, if you include text with the `include_str!()` macro, you'll have to decode it runtime. Why defer it to runtime if you can do it compile-time?
+Why are these macros useful? Let's say you want to include a binary blob inside your crate, a public key, for example. You can do that with the `include_bytes!()` macro from the Rust `std`. However, editing, viewing and copy-pasting raw binary blobs is hard! There is a reason public keys are often distributed as base64. On the other hand, if you include text with the `include_str!()` macro, you'll have to decode it runtime. Why defer it to runtime if you can do it compile-time?
 
 To get started, include this in your Cargo.toml dependencies:
 
