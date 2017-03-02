@@ -56,4 +56,4 @@ base64url_nopad!("_A") // No padding version of base64url.
 ```
 
 
-Huge kudos to the [data-encoding](https://github.com/ia0/data-encoding) crate for providing a wide variety of encodings!
+Huge kudos to the [data-encoding](https://github.com/ia0/data-encoding) crate for providing a wide variety of encodings, and [proc-macro-hack](https://github.com/dtolnay/proc-macro-hack) for providing an easy way to use procedural bang macros on stable Rust.
