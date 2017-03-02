@@ -59,4 +59,30 @@ proc_macro_expr_impl! {
     pub fn base64url_impl(input: &str) -> String {
         helper(input, data_encoding::base64url::decode)
     }
+
+
+    pub fn base2_nopad_impl(input: &str) -> String {
+        helper(input, data_encoding::base2::decode_nopad)
+    }
+    pub fn base4_nopad_impl(input: &str) -> String {
+        helper(input, data_encoding::base4::decode_nopad)
+    }
+    pub fn base8_nopad_impl(input: &str) -> String {
+        helper(input, data_encoding::base8::decode_nopad)
+    }
+    pub fn base16_nopad_impl(input: &str) -> String {
+        helper(input, data_encoding::base16::decode_nopad)
+    }
+    pub fn base32hex_nopad_impl(input: &str) -> String {
+        helper(input, data_encoding::base32hex::decode_nopad)
+    }
+    pub fn base32_nopad_impl(input: &str) -> String {
+        helper(input, data_encoding::base32::decode_nopad)
+    }
+    pub fn base64_nopad_impl(input: &str) -> String {
+        helper(input, data_encoding::base64::decode_nopad)
+    }
+    pub fn base64url_nopad_impl(input: &str) -> String {
+        helper(input, data_encoding::base64url::decode_nopad)
+    }
 }
