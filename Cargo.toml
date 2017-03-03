@@ -1,12 +1,13 @@
 [package]
 name = "binary_macros"
-version = "0.6.1"
+version = "0.6.2"
 authors = ["Pyry Kontio <pyry.kontio@drasa.eu>"]
 description = "Macros for decoding base64-like encodings in string literals to [u8] literals."
 license = "MIT"
 repository = "https://github.com/golddranks/binary_macros"
 readme = "README.md"
 keywords = ["base64", "hex", "binary", "encoding", "decoding"]
+categories = ["encoding"]
 
 [dependencies]
 proc-macro-hack = { version = "0.3.2", default-features = false }

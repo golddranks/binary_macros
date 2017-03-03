@@ -40,7 +40,7 @@ Number 97 (ASCII 'a') included with different encodings for example:
 base2!("01100001") // Binary. Uses numbers 0-1. Group of 8 digits = 1 byte.
 base4!("1201") // Base4. Uses numbers 0-3. Group of 4 digits = 1 byte.
 base8!("302=====") // Octal. Uses numbers 0-7. Group of 8 digits = 3 bytes, uses = as end padding.
-base16!("61") // Hexadecimal. Uses numbers 0-7. Group of 2 digits = 1 byte.
+base16!("61") // Hexadecimal. Uses numbers 0-9 and A-F. Group of 2 digits = 1 byte.
 base32!("C4======") // Base32. Uses numbers A-Z and 2-7. Group of 8 digits = 5 bytes, uses = as end padding.
 base32hex!("ME======") // Base32 that uses extended hexadecimal: 0-9 and A-V. Group of 8 digits = 5 bytes, uses = as end padding.
 base64!("YQ==") // Base64. Uses numbers A-Z, a-z, 0-9, + and /. Group of 4 digits = 3 bytes, uses = as end padding.
@@ -51,7 +51,7 @@ base8_nopad!("302") // No padding version of base8.
 base16_nopad!("61") // No padding version of base16.
 base32_nopad!("C4") // No padding version of base32.
 base32hex_nopad!("ME") // No padding version of base32hex.
-base64_nopad!("YQ==") // No padding version of base64.
+base64_nopad!("YQ") // No padding version of base64.
 base64url_nopad!("_A") // No padding version of base64url.
 ```
 
