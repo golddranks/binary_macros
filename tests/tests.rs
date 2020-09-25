@@ -2,21 +2,6 @@
 extern crate binary_macros;
 
 #[test]
-fn binary_works() {
-    assert_eq!(base2!("011000010110000101100001"), b"aaa");
-}
-
-#[test]
-fn base4_works() {
-    assert_eq!(base4!("1201"), b"a");
-}
-
-#[test]
-fn octal_works() {
-    assert_eq!(base8!("302====="), b"a");
-}
-
-#[test]
 fn hex_works() {
     assert_eq!(base16!("61"), b"a");
 }
@@ -45,26 +30,6 @@ fn base64url_works() {
 
 
 
-
-#[test]
-fn binary_nopad_works() {
-    assert_eq!(base2_nopad!("011000010110000101100001"), b"aaa");
-}
-
-#[test]
-fn base4_nopad_works() {
-    assert_eq!(base4_nopad!("1201"), b"a");
-}
-
-#[test]
-fn octal_nopad_works() {
-    assert_eq!(base8_nopad!("302"), b"a");
-}
-
-#[test]
-fn hex_nopad_works() { // This is basically the same as without pad :D
-    assert_eq!(base16_nopad!("61"), b"a");
-}
 
 #[test]
 fn base32hex_nopad_works() {
