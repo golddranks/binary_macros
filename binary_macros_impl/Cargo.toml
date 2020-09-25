@@ -1,6 +1,6 @@
 [package]
 name = "binary_macros_impl"
-version = "0.6.0"
+version = "1.0.0"
 authors = ["Pyry Kontio <pyry.kontio@drasa.eu>"]
 description = "Procedural macro implementations for decoding base64-like encodings in string literals to [u8] literals."
 license = "MIT"
@@ -9,9 +9,9 @@ readme = "../README.md"
 keywords = ["base64", "hex", "binary", "encoding", "decoding"]
 
 [dependencies]
-proc-macro-hack = { version = "0.3.2", default-features = false }
-data-encoding = "1.2"
-dotenv = "0.8"
+proc-macro-hack = "0.5.16"
+data-encoding = "2.3"
+dotenv = "0.15"
 
 [lib]
 proc-macro = true

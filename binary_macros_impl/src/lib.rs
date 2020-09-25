@@ -1,15 +1,16 @@
-extern crate proc_macro;
-#[macro_use]
-extern crate proc_macro_hack;
 extern crate data_encoding;
+extern crate proc_macro_hack;
+extern crate proc_macro;
 extern crate dotenv;
-use std::io::Read;
-use data_encoding::decode::Error;
 
-fn helper<F>(input: &str, decoder: F)
-    -> String
-    where F: Fn(&[u8]) -> Result<Vec<u8>, Error>
+use std::str::FromStr;
+use std::io::Read;
+use proc_macro_hack::proc_macro_hack;
+use proc_macro::TokenStream;
+
+fn helper(input: TokenStream, decoder: data_encoding::Encoding) -> TokenStream
 {
+    let input = input.to_string();
     let input = input.trim_matches('"');
 
     let byte_vec = if input.starts_with("file:") {
@@ -17,72 +18,67 @@ fn helper<F>(input: &str, decoder: F)
         let mut file = std::fs::File::open(&input[5..]).expect("Error opening file");
         let mut contents = String::new();
         file.read_to_string(&mut contents).expect("Error reading file");
-        decoder(contents.trim().as_bytes()).expect("Parse error")
+        decoder.decode(contents.trim().as_bytes()).expect("Parse error")
 
     } else if input.starts_with("env:") {
 
         dotenv::dotenv().ok();
         let var = std::env::var(&input[4..]).expect("Error reading environment variable");
-        decoder(var.as_bytes()).expect("Parse error")
+        decoder.decode(var.as_bytes()).expect("Parse error")
 
     } else {
 
-        decoder(input.as_bytes()).expect("Parse error")
+        decoder.decode(input.as_bytes()).expect("Parse error")
 
     };
 
-    format!("{{static _BIN: [u8; {}] = {:?}; &_BIN}}", byte_vec.len(), byte_vec)
+    TokenStream::from_str(&format!("{{static _BIN: [u8; {}] = {:?}; &_BIN}}", byte_vec.len(), byte_vec)).expect("Parse error")
 }
 
-proc_macro_expr_impl! {
-    pub fn base2_impl(input: &str) -> String {
-        helper(input, data_encoding::base2::decode)
-    }
-    pub fn base4_impl(input: &str) -> String {
-        helper(input, data_encoding::base4::decode)
-    }
-    pub fn base8_impl(input: &str) -> String {
-        helper(input, data_encoding::base8::decode)
-    }
-    pub fn base16_impl(input: &str) -> String {
-        helper(input, data_encoding::base16::decode)
-    }
-    pub fn base32hex_impl(input: &str) -> String {
-        helper(input, data_encoding::base32hex::decode)
-    }
-    pub fn base32_impl(input: &str) -> String {
-        helper(input, data_encoding::base32::decode)
-    }
-    pub fn base64_impl(input: &str) -> String {
-        helper(input, data_encoding::base64::decode)
-    }
-    pub fn base64url_impl(input: &str) -> String {
-        helper(input, data_encoding::base64url::decode)
-    }
+
+#[proc_macro_hack]
+pub fn base16(input: TokenStream) -> TokenStream {
+    helper(input, data_encoding::HEXLOWER)
+}
+
+#[proc_macro_hack]
+pub fn base32hex(input: TokenStream) -> TokenStream {
+    helper(input, data_encoding::BASE32HEX)
+}
+
+#[proc_macro_hack]
+pub fn base32(input: TokenStream) -> TokenStream {
+    helper(input, data_encoding::BASE32)
+}
+
+#[proc_macro_hack]
+pub fn base64(input: TokenStream) -> TokenStream {
+    helper(input, data_encoding::BASE64)
+}
+
+#[proc_macro_hack]
+pub fn base64url(input: TokenStream) -> TokenStream {
+    helper(input, data_encoding::BASE64URL)
+}
 
 
-    pub fn base2_nopad_impl(input: &str) -> String {
-        helper(input, data_encoding::base2::decode_nopad)
-    }
-    pub fn base4_nopad_impl(input: &str) -> String {
-        helper(input, data_encoding::base4::decode_nopad)
-    }
-    pub fn base8_nopad_impl(input: &str) -> String {
-        helper(input, data_encoding::base8::decode_nopad)
-    }
-    pub fn base16_nopad_impl(input: &str) -> String {
-        helper(input, data_encoding::base16::decode_nopad)
-    }
-    pub fn base32hex_nopad_impl(input: &str) -> String {
-        helper(input, data_encoding::base32hex::decode_nopad)
-    }
-    pub fn base32_nopad_impl(input: &str) -> String {
-        helper(input, data_encoding::base32::decode_nopad)
-    }
-    pub fn base64_nopad_impl(input: &str) -> String {
-        helper(input, data_encoding::base64::decode_nopad)
-    }
-    pub fn base64url_nopad_impl(input: &str) -> String {
-        helper(input, data_encoding::base64url::decode_nopad)
-    }
+
+#[proc_macro_hack]
+pub fn base32hex_nopad(input: TokenStream) -> TokenStream {
+    helper(input, data_encoding::BASE32HEX_NOPAD)
+}
+
+#[proc_macro_hack]
+pub fn base32_nopad(input: TokenStream) -> TokenStream {
+    helper(input, data_encoding::BASE32_NOPAD)
+}
+
+#[proc_macro_hack]
+pub fn base64_nopad(input: TokenStream) -> TokenStream {
+    helper(input, data_encoding::BASE64_NOPAD)
+}
+
+#[proc_macro_hack]
+pub fn base64url_nopad(input: TokenStream) -> TokenStream {
+    helper(input, data_encoding::BASE64URL_NOPAD)
 }
