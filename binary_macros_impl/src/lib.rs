@@ -28,7 +28,7 @@ fn helper(input: TokenStream, decoder: data_encoding::Encoding) -> TokenStream {
         decoder.decode(input.as_bytes()).expect("Parse error")
     };
 
-    TokenStream::from_str(&format!("{{static _BIN: [u8; {}] = {:?}; &_BIN}}", byte_vec.len(), byte_vec)).expect("Parse error")
+    TokenStream::from_str(&format!("{:?}", byte_vec)).expect("Parse error")
 }
 
 #[proc_macro_hack]
